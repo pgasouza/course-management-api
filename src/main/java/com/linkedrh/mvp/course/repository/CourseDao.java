@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.List;
 
+import com.linkedrh.mvp.course.exception.CourseNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -55,6 +57,28 @@ public class CourseDao {
                 rs.getInt("duration"),
                 rs.getTimestamp("created_at").toInstant()
         );
+    }
+
+    public List<CourseResponse>findAll(){
+        return jdbc.query(
+                "SELECT * FROM courses ORDER BY name ",
+                this::mapRowToResponse
+        );
+    }
+
+    public CourseResponse update(int id,CourseCreateRequest req){
+        jdbc.update(
+                "UPDATE courses SET name = ?, description = ?, duration = ? WHERE id = ?",
+                req.getName(), req.getDescription(), req.getDuration(), id
+        );
+        return  findById(id).orElseThrow(() -> new CourseNotFoundException(String.valueOf(id)));
+    }
+
+    public void delete(int id){
+        jdbc.update("DELETE FROM turma_participante WHERE turma IN (SELECT codigo FROM turma WHERE curso = ?)", id);
+        jdbc.update("DELETE FROM turma WHERE curso = ?", id);
+
+        jdbc.update("DELETE FROM courses WHERE id = ?", id);
     }
 }
 
