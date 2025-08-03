@@ -6,19 +6,29 @@ CREATE TABLE IF NOT EXISTS courses (
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE turma_participante (
-    codigo SERIAL PRIMARY KEY,
-    turma INT NOT NULL,
-    funcionario INT NOT NULL,
-    FOREIGN KEY (turma) REFERENCES turma(codigo) ON DELETE CASCADE,
-    FOREIGN KEY (funcionario) REFERENCES funcionario(codigo)
+CREATE TABLE IF NOT EXISTS employees (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  cpf CHAR(11) NOT NULL,
+  birth_date DATE NOT NULL,
+  position VARCHAR(200) NOT NULL,
+  admission_date DATE NOT NULL,
+  active BOOLEAN NOT NULL
 );
 
-CREATE TABLE turma (
-    codigo SERIAL PRIMARY KEY,
-    inicio DATE NOT NULL,
-    fim DATE NOT NULL,
-    local VARCHAR(200),
-    curso INT NOT NULL,
-    FOREIGN KEY (curso) REFERENCES courses(id) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS training_sessions (
+  id SERIAL PRIMARY KEY,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  location VARCHAR(200),
+  course_id INT NOT NULL,
+  FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS training_participants (
+  id SERIAL PRIMARY KEY,
+  training_id INT NOT NULL,
+  employee_id INT NOT NULL,
+  FOREIGN KEY (training_id) REFERENCES training_sessions(id) ON DELETE CASCADE,
+  FOREIGN KEY (employee_id) REFERENCES employees(id)
 );

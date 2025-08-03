@@ -74,10 +74,8 @@ public class CourseDao {
         return  findById(id).orElseThrow(() -> new CourseNotFoundException(String.valueOf(id)));
     }
 
-    public void delete(int id){
-        jdbc.update("DELETE FROM turma_participante WHERE turma IN (SELECT codigo FROM turma WHERE curso = ?)", id);
-        jdbc.update("DELETE FROM turma WHERE curso = ?", id);
-
+    public void delete(int id) {
+        jdbc.update("DELETE FROM training_sessions WHERE course_id = ?", id);
         jdbc.update("DELETE FROM courses WHERE id = ?", id);
     }
 }
