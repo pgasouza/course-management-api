@@ -4,7 +4,6 @@ import com.linkedrh.mvp.course.dto.CourseCreateRequest;
 import com.linkedrh.mvp.course.dto.CourseResponse;
 import com.linkedrh.mvp.course.service.CourseService;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

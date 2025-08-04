@@ -5,7 +5,6 @@ import com.linkedrh.mvp.course.dto.CourseResponse;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.Optional;
 import java.util.List;
 
