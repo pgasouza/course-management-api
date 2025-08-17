@@ -20,8 +20,6 @@ public class TrainingSessionService {
     }
 
     public TrainingSessionResponse create(TrainingSessionCreateRequest req) {
-        // Você pode colocar regras de negócio aqui antes de criar
-
         return dao.insert(req);
     }
 
@@ -34,12 +32,11 @@ public class TrainingSessionService {
     }
 
     public TrainingSessionResponse update(Integer id, @Valid TrainingSessionUpdateRequest req) {
-        // Busca a turma existente para garantir que ela existe
         TrainingSessionResponse existing = findById(id);
 
-        // Não verifica courseId no req, pois não existe e não deve ser alterado
 
-        // Apenas atualiza os campos permitidos no DAO
+
+
         return dao.update(id, req);
     }
 
@@ -51,7 +48,7 @@ public class TrainingSessionService {
 
 
     public void delete(Integer id) {
-        // Você pode verificar se existe antes, lançar exceção etc
+
         findById(id);
         dao.delete(id);
     }
