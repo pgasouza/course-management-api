@@ -4,7 +4,7 @@
 
 API REST desenvolvida com **Java 17** e **Spring Boot 3** para gerenciar cursos, sessões de treinamento e a inscrição de participantes.
 
-Este projeto foi originalmente criado como uma solução para um desafio técnico e, posteriormente, aprimorado e expandido para compor meu portfólio pessoal, demonstrando a aplicação de boas práticas de desenvolvimento backend.
+Este projeto foi originalmente criado como uma solução para um desafio técnico e, posteriormente, aprimorado e expandido para compor meu portfólio pessoal, demonstrando a aplicação de boas práticas de desenvolvimento backend e DevOps.
 
 ---
 
@@ -15,6 +15,7 @@ Este projeto foi originalmente criado como uma solução para um desafio técnic
 -   **Gerenciamento de Participantes:** Operações CRUD para os participantes, com associação a uma sessão de treinamento específica.
 -   **Validação de Dados:** Utilização da Bean Validation para garantir a integridade dos dados na camada de entrada da API.
 -   **Tratamento Global de Exceções:** Implementação de um `ControllerAdvice` para capturar exceções e retornar respostas de erro padronizadas.
+-   **Containerização:** Aplicação e banco de dados totalmente containerizados com Docker, garantindo portabilidade e um ambiente de execução consistente.
 
 ---
 
@@ -24,8 +25,8 @@ Este projeto foi originalmente criado como uma solução para um desafio técnic
     -   `Controller`: Camada de entrada da API, responsável por gerenciar as requisições HTTP.
     -   `Service`: Camada de serviço, onde reside a lógica de negócio da aplicação.
     -   `Repository`: Camada de acesso a dados, utilizando Spring Data JPA.
--   **Padrão DTO (Data Transfer Object):** Uso de DTOs para desacoplar o modelo de dados interno da representação exposta na API, melhorando a segurança e a manutenibilidade.
--   **Injeção de Dependências:** Utilização intensiva do mecanismo de injeção de dependências do Spring para gerenciar os componentes da aplicação.
+-   **Padrão DTO (Data Transfer Object):** Uso de DTOs para desacoplar o modelo de dados interno da representação exposta na API.
+-   **Injeção de Dependências:** Utilização intensiva do mecanismo de injeção de dependências do Spring.
 -   **Princípios RESTful:** Design da API seguindo as convenções e boas práticas do padrão REST.
 
 ---
@@ -35,51 +36,59 @@ Este projeto foi originalmente criado como uma solução para um desafio técnic
 -   **Java 17**
 -   **Spring Boot 3**
 -   **Spring Data JPA / Hibernate**
--   **Spring Web**
--   **PostgreSQL** (Banco de Dados)
--   **Maven** (Gerenciador de Dependências)
+-   **PostgreSQL**
+-   **Docker** e **Docker Compose**
+-   **Maven**
 -   **Lombok**
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-### Pré-requisitos
+Existem duas maneiras de executar a aplicação:
 
-Antes de começar, você vai precisar ter instalado em sua máquina:
--   [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
--   [Maven](https://maven.apache.org/download.cgi)
--   [PostgreSQL](https://www.postgresql.org/download/)
+### Método 1: Executando com Docker (Recomendado)
 
-### Passos
+A maneira mais simples e recomendada de executar a aplicação e o banco de dados é utilizando o Docker Compose, que orquestra os containers de forma automática.
 
-1.  **Clone o repositório:**
+**Pré-requisitos:**
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/) (geralmente já vem com o Docker Desktop)
+
+**Passos:**
+1.  Clone este repositório.
+2.  Na raiz do projeto (onde se encontra o arquivo `docker-compose.yml`), execute o seguinte comando no terminal:
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    docker-compose up -d
     ```
+3.  Aguarde os containers serem criados e iniciados. A API estará pronta para uso em `http://localhost:8080`.
 
-2.  **Navegue até o diretório do projeto:**
-    ```bash
-    cd seu-repositorio
-    ```
+*(Nota: Este método requer os arquivos `Dockerfile` e `docker-compose.yml` na raiz do projeto.)*
 
-3.  **Configure o banco de dados:**
-    -   Crie um banco de dados no PostgreSQL (ex: `course_db`).
-    -   Abra o arquivo `src/main/resources/application.properties`.
-    -   Altere as propriedades `spring.datasource.url`, `spring.datasource.username` e `spring.datasource.password` com as suas credenciais.
+### Método 2: Executando Localmente
 
-4.  **Execute a aplicação:**
+Para executar a aplicação diretamente na sua máquina, sem o Docker.
+
+**Pré-requisitos:**
+- [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [Maven](https://maven.apache.org/download.cgi)
+- [PostgreSQL](https://www.postgresql.org/download/)
+
+**Passos:**
+1.  Clone o repositório.
+2.  Crie um banco de dados no seu PostgreSQL (ex: `course_db`).
+3.  No arquivo `src/main/resources/application.properties`, altere as propriedades `spring.datasource.url`, `spring.datasource.username` e `spring.datasource.password` com suas credenciais.
+4.  Navegue até a raiz do projeto e execute o comando:
     ```bash
     mvn spring-boot:run
     ```
-
 5.  A API estará disponível em `http://localhost:8080`.
 
 ---
 
 ## 📋 Endpoints da API
 
-A API está documentada com todos os endpoints necessários para um gerenciamento completo das entidades.
+A API fornece endpoints RESTful para o gerenciamento completo das entidades.
 
 ### Cursos (`/courses`)
 
