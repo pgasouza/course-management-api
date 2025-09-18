@@ -1,8 +1,31 @@
+version: '3.8'
+
 services:
+
+  app:
+    container_name: springboot_app
+
+    build: .
+
+    ports:
+      - "8080:8080"
+
+    environment:
+
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-postgres:5432/${POSTGRES_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+    depends_on:
+      - db-postgres
+
+
   db-postgres:
     image: bitnami/postgresql
+    container_name: postgres_db
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRESQL_USERNAME: ${POSTGRES_USERNAME}
       POSTGRESQL_PASSWORD: ${POSTGRES_PASSWORD}
