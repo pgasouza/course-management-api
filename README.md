@@ -2,7 +2,7 @@
 
 ### Status: Projeto de Portfólio ✔️
 
-API REST desenvolvida com **Java 17** e **Spring Boot 3** para gerenciar cursos, sessões de treinamento e a inscrição de participantes.
+API REST desenvolvida com **Java 21** e **Spring Boot 3** para gerenciar cursos, sessões de treinamento e a inscrição de participantes.
 
 Este projeto foi originalmente criado como uma solução para um desafio técnico e, posteriormente, aprimorado e expandido para compor meu portfólio pessoal, demonstrando a aplicação de boas práticas de desenvolvimento backend e DevOps.
 
@@ -25,7 +25,7 @@ Este projeto foi originalmente criado como uma solução para um desafio técnic
     -   `Controller`: Camada de entrada da API, responsável por gerenciar as requisições HTTP.
     -   `Service`: Camada de serviço, onde reside a lógica de negócio da aplicação.
     -   `Repository`: Camada de acesso a dados, utilizando Spring Data JPA.
--   **Padrão DTO (Data Transfer Object):** Uso de DTOs para desacoplar o modelo de dados interno da representação exposta na API.
+-   **Padrão DTO (Data Transfer Object):** Uso de DTOs para desacoular o modelo de dados interno da representação exposta na API.
 -   **Injeção de Dependências:** Utilização intensiva do mecanismo de injeção de dependências do Spring.
 -   **Princípios RESTful:** Design da API seguindo as convenções e boas práticas do padrão REST.
 
@@ -33,7 +33,7 @@ Este projeto foi originalmente criado como uma solução para um desafio técnic
 
 ## 🛠️ Tecnologias Utilizadas
 
--   **Java 17**
+-   **Java 21**
 -   **Spring Boot 3**
 -   **Spring Data JPA / Hibernate**
 -   **PostgreSQL**
@@ -70,7 +70,7 @@ A maneira mais simples e recomendada de executar a aplicação e o banco de dado
 Para executar a aplicação diretamente na sua máquina, sem o Docker.
 
 **Pré-requisitos:**
-- [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [JDK 21](https://adoptium.net/temurin/releases/?version=21)
 - [Maven](https://maven.apache.org/download.cgi)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
